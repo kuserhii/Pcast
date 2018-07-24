@@ -169,7 +169,6 @@ class PlayerDetailsView: UIView {
                 self.miniPlayerView.alpha = 1
                 self.maximizedStackView.alpha = 0
             }
-            
         })
     }
     
@@ -188,7 +187,6 @@ class PlayerDetailsView: UIView {
     }
     
     
-    
     //MARK:- IBActions and Outlets
     
     @IBOutlet weak var miniEpisodeImageView: UIImageView!
@@ -200,13 +198,11 @@ class PlayerDetailsView: UIView {
             miniPlayPauseButton.addTarget(self, action: #selector(handlePayPause), for: .touchUpInside)
         }
     }
+    
     @IBOutlet weak var miniFastForwardButton: UIButton!
-    
-    
     @IBOutlet weak var miniPlayerView: UIView!
     @IBOutlet weak var maximizedStackView: UIStackView!
 
-    
     
     @IBAction func handleCurrentTimeSlider(_ sender: UISlider) {
         let percentage = currentTimeSlider.value
@@ -218,13 +214,16 @@ class PlayerDetailsView: UIView {
         player.seek(to: seektime)
     }
     
+    
     @IBAction func handleFastForward(_ sender: UIButton) {
         seekToCurrenTime(delta: 15)
     }
     
+    
     @IBAction func handleRewind(_ sender: UIButton) {
        seekToCurrenTime(delta: -15)
     }
+    
     
     fileprivate func seekToCurrenTime(delta: Int64) {
         let fifteenSeconds = CMTimeMake(delta, 1)
@@ -236,6 +235,7 @@ class PlayerDetailsView: UIView {
     @IBAction func handleVolumeChange(_ sender: UISlider) {
         player.volume = sender.value
     }
+    
     
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var currentTimeLabel: UILabel!
