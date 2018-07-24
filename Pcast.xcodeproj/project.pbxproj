@@ -21,6 +21,7 @@
 		C518D82620FF23C8004BC4BF /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C518D82520FF23C8004BC4BF /* PodcastCell.swift */; };
 		C518D82820FF3DDE004BC4BF /* EpisodesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C518D82720FF3DDE004BC4BF /* EpisodesController.swift */; };
 		C51FF16C210332F300B26AE5 /* CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51FF16B210332F300B26AE5 /* CMTime.swift */; };
+		C5216304210796BF00A8734B /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5216303210796BF00A8734B /* UIApplication.swift */; };
 		C529011F2101B06D008837CC /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C529011E2101B06D008837CC /* Episode.swift */; };
 		C52901262101B7F9008837CC /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52901242101B7F9008837CC /* EpisodeCell.swift */; };
 		C52901272101B7F9008837CC /* EpisodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C52901252101B7F9008837CC /* EpisodeCell.xib */; };
@@ -48,6 +49,7 @@
 		C518D82520FF23C8004BC4BF /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 		C518D82720FF3DDE004BC4BF /* EpisodesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesController.swift; sourceTree = "<group>"; };
 		C51FF16B210332F300B26AE5 /* CMTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMTime.swift; sourceTree = "<group>"; };
+		C5216303210796BF00A8734B /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		C529011E2101B06D008837CC /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		C52901242101B7F9008837CC /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 		C52901252101B7F9008837CC /* EpisodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeCell.xib; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			children = (
 				C529012B2101C6A1008837CC /* RRSFeed.swift */,
 				C51FF16B210332F300B26AE5 /* CMTime.swift */,
+				C5216303210796BF00A8734B /* UIApplication.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				C518D82820FF3DDE004BC4BF /* EpisodesController.swift in Sources */,
 				C518D7FF20FE773F004BC4BF /* AppDelegate.swift in Sources */,
 				C52901262101B7F9008837CC /* EpisodeCell.swift in Sources */,
+				C5216304210796BF00A8734B /* UIApplication.swift in Sources */,
 				C529012C2101C6A1008837CC /* RRSFeed.swift in Sources */,
 				C518D82120FF1499004BC4BF /* APIService.swift in Sources */,
 				C518D81520FE778F004BC4BF /* MainTabBarController.swift in Sources */,
@@ -465,7 +469,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ku.serhii.Pcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -484,7 +488,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ku.serhii.Pcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
