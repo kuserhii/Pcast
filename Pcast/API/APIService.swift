@@ -35,13 +35,9 @@ class APIService  {
                 
                 guard let feed = result.rssFeed else { return }
                 let episodes = feed.toEpisodes()
-                completionHandler(episodes)
-                
+                completionHandler(episodes)     
             })
         }
-        
-       
-        
     }
     
     
@@ -58,7 +54,6 @@ class APIService  {
             
             guard let data = dataResponse.data else { return }
             do {
-
                 let searchResult = try
                     JSONDecoder().decode(PodcastSearchResult.self, from: data)
                 completionHandler(searchResult.results)

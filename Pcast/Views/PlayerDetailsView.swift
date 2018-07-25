@@ -17,12 +17,35 @@ class PlayerDetailsView: UIView {
             miniTitleLabel.text = episode.title
             titleLabel.text = episode.title
             authorLabel.text = episode.author
+            
+            setupNowPlaingInfo()
+            
             playEpisode()
             guard let url = URL(string: episode.imageUrl ?? "" ) else { return }
             episodeImageView.sd_setImage(with: url)
-            miniEpisodeImageView.sd_setImage(with: url)
+            miniEpisodeImageView.sd_setImage(with: url) { (image, _, _, _) in
+                guard let image = image else { return  }
+                
+                var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo
+                
+                let artwork = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { (_) -> UIImage in
+                    return image
+                })
+                
+                nowPlayingInfo?[MPMediaItemPropertyArtwork] = artwork
+                MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+            }
         }
     }
+    
+    fileprivate func setupNowPlaingInfo() {
+        var nowPlayingInfo = [String: Any]()
+        nowPlayingInfo[MPMediaItemPropertyTitle] = episode.title
+        nowPlayingInfo[MPMediaItemPropertyArtist] = episode.author
+        
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+    }
+    
     
     fileprivate func playEpisode() {
         print("Trying to play episode at url:", episode.streamUrl)
@@ -48,11 +71,26 @@ class PlayerDetailsView: UIView {
             self?.currentTimeLabel.text = time.toDisplayString()
             let durationTime = self?.player.currentItem?.duration
             self?.durationLabel.text = durationTime?.toDisplayString()
+            self?.setupLockscreenCurrentTime()
+            
             self?.updateCurrentTimeSlider()
         }
     }
     
+    fileprivate func setupLockscreenCurrentTime() {
+        var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo
+        
+        guard let currenItem = player.currentItem else { return }
+        let durationInSeconds = CMTimeGetSeconds(currenItem.duration)
+        
+        let elapsedTime = CMTimeGetSeconds(player.currentTime())
+        
+        nowPlayingInfo?[MPNowPlayingInfoPropertyElapsedPlaybackTime] = elapsedTime
+        nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = durationInSeconds
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+    }
     
+     
     fileprivate func updateCurrentTimeSlider() {
         let currentTimeSeconds = CMTimeGetSeconds(player.currentTime())
         let durationSeconds = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(1, 1))
@@ -150,9 +188,7 @@ class PlayerDetailsView: UIView {
     
     func handlePanChanged(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self.superview)
-        print(translation.y)
         self.transform = CGAffineTransform(translationX: 0, y: translation.y)
-        
         self.miniPlayerView.alpha = 1 + translation.y / 200
         self.maximizedStackView.alpha = -translation.y / 200
     }
@@ -199,7 +235,11 @@ class PlayerDetailsView: UIView {
         }
     }
     
-    @IBOutlet weak var miniFastForwardButton: UIButton!
+    @IBOutlet weak var miniFastForwardButton: UIButton! {
+        didSet {
+            miniFastForwardButton.addTarget(self, action: #selector(handleFastForward), for: .touchUpInside)
+        }
+    }
     @IBOutlet weak var miniPlayerView: UIView!
     @IBOutlet weak var maximizedStackView: UIStackView!
 
@@ -302,7 +342,6 @@ class PlayerDetailsView: UIView {
             titleLabel.numberOfLines = 2
         }
     }
-    
-   
+
     
 }
