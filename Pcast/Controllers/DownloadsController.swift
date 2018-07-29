@@ -36,14 +36,37 @@ class DownloadsController: UITableViewController {
     
     //MARK:- UITableView
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let episode = self.episodes[indexPath.row]
+        
+        if episode.fileUrl != nil && episode.fileUrl != "" {
+            UIApplication.mainTabBarController()?.maximizePlayerDetails(episode: episode,playlistEpisodes: self.episodes)
+        } else {
+            let alertController = UIAlertController(title: "File Url not found", message: "Cannot find local file", preferredStyle: .actionSheet)
+            
+            
+            alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+                 UIApplication.mainTabBarController()?.maximizePlayerDetails(episode: episode,playlistEpisodes: self.episodes)
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            
+            present(alertController, animated: true)
+        }
+        
+        
+         
+    }
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return episodes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! EpisodeCell
-        cell.episode = self.episodes[indexPath.row]
         
+        cell.episode = self.episodes[indexPath.row]
         return cell
     }
     

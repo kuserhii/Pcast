@@ -111,8 +111,9 @@ class EpisodesController: UITableViewController {
         let downtloadAction = UITableViewRowAction(style: .normal, title: "Download") { (_, _) in
             print("Downloading episode")
             let episode = self.episodes[indexPath.row]
-            
             UserDefaults.standard.downloadEpisode(episode: episode)
+            APIService.shared.downloadEpisode(episode: episode)
+            
             
         }
         return [downtloadAction]
